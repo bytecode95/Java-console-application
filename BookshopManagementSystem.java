@@ -1,8 +1,12 @@
 import java.util.Scanner;
 
-public class Login{
+public class BookshopManagementSystem{
     public static void main(String[] args){
-        Scanner sc = new Scanner(System.in);
+        ShowloginPage();
+    }
+
+    public static void ShowloginPage(){
+          Scanner sc = new Scanner(System.in);
         System.out.println("+-------------------------------------------------------------------------------+");
         System.out.println("|                                   LOGIN PAGE                                  |");
         System.out.println("+-------------------------------------------------------------------------------+");
@@ -24,7 +28,20 @@ public class Login{
             System.out.println("Wrong password..! Try again..");
         }else{
             System.out.println("Login Successful!");
+            ShowBookshopMenu();      
         }
+    }
+
+    public static void ShowBookshopMenu(){
+        System.out.println("+-------------------------------------------------------------------------------+");
+        System.out.println("|                 WELCOME TO SHI BOOK SHOP MANAGEMENT SYSTEM                    |");
+        System.out.println("+-------------------------------------------------------------------------------+");
+
+        
+
 
     }
+
+
+
 }
