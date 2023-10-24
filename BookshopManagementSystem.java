@@ -1,9 +1,11 @@
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class BookshopManagementSystem{
     public static void main(String[] args){
         ShowloginPage();
     }
+
     public static void ShowloginPage(){
           Scanner sc = new Scanner(System.in);
         System.out.println("+-------------------------------------------------------------------------------+");
@@ -85,10 +87,49 @@ public class BookshopManagementSystem{
     }
 
     public static void AddBook(){
+        Scanner sc = new Scanner(System.in);
          System.out.println("+-------------------------------------------------------------------------------+");
          System.out.println("|                               ADD BOOK                                        |");
          System.out.println("+-------------------------------------------------------------------------------+");
+
+        Book[] books = new Book[10];
+
+        for(int i=0; i< books.length; i++){
+            books[i] = new Book();
+            System.out.print("Enter Book ID: ");
+            books[i].bookID = sc.next();
+            System.out.print("Enter Book Name: ");
+            books[i].name = sc.next();
+            System.out.print("Enter Book Price: ");
+            books[i].price = sc.nextDouble();
+            System.out.print("Enter Book Quantity: ");
+            books[i].quantity = sc.nextInt();
+            System.out.print("Enter Author: ");
+            books[i].author = sc.next();
+            
+            System.out.println("Book Added Succesfully!...");
+            System.out.print("Do you want to add another book(Y/N): ");
+            String answer = sc.next();
+
+            switch(answer){
+                case "Y":
+                    continue;
+                case "y":
+                    continue;
+                case "N":
+                    ShowBookshopMenu();
+                    break;
+                case "n":
+                    ShowBookshopMenu();
+                    break;
+            }
+        }
+
+
+        sc.close();
     }
+
+
 
     public static void DeleteBook(){
          System.out.println("+-------------------------------------------------------------------------------+");
@@ -107,6 +148,11 @@ public class BookshopManagementSystem{
         System.out.println("+-------------------------------------------------------------------------------+");
         System.out.println("|                               SHOW ALL BOOK                                   |");
         System.out.println("+-------------------------------------------------------------------------------+");
+
+
+
+
+
     }
 
     public static void LogOut(){
@@ -120,7 +166,13 @@ public class BookshopManagementSystem{
         System.out.println("|                              Exit the System                                  |");
         System.out.println("+-------------------------------------------------------------------------------+");
     }
+}
 
-
-
+class Book{
+    //attributes
+    String bookID;
+    String name;
+    double price;
+    int quantity;
+    String author;
 }
