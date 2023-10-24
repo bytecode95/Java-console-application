@@ -110,10 +110,11 @@ public class BookshopManagementSystem{
 
             Book newBook = new Book(bookID, name, price, quantity, author);
             books.add(newBook);
-            System.out.println("Book Added Succesfully!...");
             for (Book book : books) {
-                System.out.println(book.name);
+                System.out.println(book);
             }
+            System.out.println("Book Added Succesfully!...");
+            
 
             System.out.print("Do you want to add another book(Y/N): ");
             String answer = sc.next();
@@ -134,6 +135,7 @@ public class BookshopManagementSystem{
             }
             sc.close();
         }
+       
         
         
         
@@ -191,7 +193,11 @@ class Book{
     String author;
 
     public Book(String bookID, String name, double  price, int quantity, String author){
-
+        this.bookID = bookID;
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+        this.author = author;
     }
 
 
