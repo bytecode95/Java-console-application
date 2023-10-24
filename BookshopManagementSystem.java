@@ -112,7 +112,7 @@ public class BookshopManagementSystem{
             books.add(newBook);
             System.out.println("Book Added Succesfully!...");
             for (Book book : books) {
-                System.out.println(book);
+                System.out.println(book.name);
             }
 
             System.out.print("Do you want to add another book(Y/N): ");
@@ -120,8 +120,10 @@ public class BookshopManagementSystem{
 
             switch(answer){
                 case "Y":
+                    System.out.println("***********************************************************");
                     continue;
                 case "y":
+                    System.out.println("***********************************************************");
                     continue;
                 case "N":
                     ShowBookshopMenu();
@@ -189,7 +191,7 @@ class Book{
     String author;
 
     public Book(String bookID, String name, double  price, int quantity, String author){
-        
+
     }
 
 
