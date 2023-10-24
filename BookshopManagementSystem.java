@@ -1,5 +1,6 @@
 import java.util.Scanner;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BookshopManagementSystem{
     public static void main(String[] args){
@@ -92,22 +93,28 @@ public class BookshopManagementSystem{
          System.out.println("|                               ADD BOOK                                        |");
          System.out.println("+-------------------------------------------------------------------------------+");
 
-        Book[] books = new Book[10];
+        List<Book> books = new ArrayList<>();
 
-        for(int i=0; i< books.length; i++){
-            books[i] = new Book();
+        while(true){ 
             System.out.print("Enter Book ID: ");
-            books[i].bookID = sc.next();
+            String bookID = sc.next();
             System.out.print("Enter Book Name: ");
-            books[i].name = sc.next();
+            String name = sc.next();
             System.out.print("Enter Book Price: ");
-            books[i].price = sc.nextDouble();
+            double price = sc.nextDouble();
             System.out.print("Enter Book Quantity: ");
-            books[i].quantity = sc.nextInt();
+            int quantity = sc.nextInt();
             System.out.print("Enter Author: ");
-            books[i].author = sc.next();
-            
+            String author = sc.next();
+
+
+            Book newBook = new Book(bookID, name, price, quantity, author);
+            books.add(newBook);
             System.out.println("Book Added Succesfully!...");
+            for (Book book : books) {
+                System.out.println(book);
+            }
+
             System.out.print("Do you want to add another book(Y/N): ");
             String answer = sc.next();
 
@@ -123,10 +130,11 @@ public class BookshopManagementSystem{
                     ShowBookshopMenu();
                     break;
             }
+            sc.close();
         }
-
-
-        sc.close();
+        
+        
+        
     }
 
 
@@ -149,9 +157,13 @@ public class BookshopManagementSystem{
         System.out.println("|                               SHOW ALL BOOK                                   |");
         System.out.println("+-------------------------------------------------------------------------------+");
 
+        System.out.println("---------------------------------------------------------------------------------");
+        System.out.printf("| %-13s | %-13s | %-13s | %-13s | %-13s |\n","Book ID", "Book Name", "Book Price", "Book Qty", "Book Author");
+        System.out.println("---------------------------------------------------------------------------------");
 
 
-
+       
+       
 
     }
 
@@ -175,4 +187,10 @@ class Book{
     double price;
     int quantity;
     String author;
+
+    public Book(String bookID, String name, double  price, int quantity, String author){
+        
+    }
+
+
 }
