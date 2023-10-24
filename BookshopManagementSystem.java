@@ -99,20 +99,17 @@ public class BookshopManagementSystem{
             System.out.print("Enter Book ID: ");
             String bookID = sc.next();
             System.out.print("Enter Book Name: ");
-            String name = sc.next();
+            String name = sc.nextLine();
             System.out.print("Enter Book Price: ");
             double price = sc.nextDouble();
             System.out.print("Enter Book Quantity: ");
             int quantity = sc.nextInt();
             System.out.print("Enter Author: ");
-            String author = sc.next();
+            String author = sc.nextLine();
 
 
             Book newBook = new Book(bookID, name, price, quantity, author);
             books.add(newBook);
-            for (Book book : books) {
-                System.out.println(book);
-            }
             System.out.println("Book Added Succesfully!...");
             
 
@@ -135,7 +132,8 @@ public class BookshopManagementSystem{
             }
             sc.close();
         }
-       
+
+        
         
         
         
@@ -144,9 +142,15 @@ public class BookshopManagementSystem{
 
 
     public static void DeleteBook(){
+        Scanner sc = new Scanner(System.in);
          System.out.println("+-------------------------------------------------------------------------------+");
          System.out.println("|                               DELETE BOOK                                     |");
          System.out.println("+-------------------------------------------------------------------------------+");
+
+        System.out.print("Enter Book Id to delete the item: ");
+        String bookID = sc.next();
+
+
 
     }
 
@@ -198,6 +202,11 @@ class Book{
         this.price = price;
         this.quantity = quantity;
         this.author = author;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("| %-13s | %-13s | %-13s | %-13s | %-13s |\n", bookID, name, price, quantity, author);
     }
 
 
