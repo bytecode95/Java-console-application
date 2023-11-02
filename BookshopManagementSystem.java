@@ -88,55 +88,59 @@ public class BookshopManagementSystem{
     }
 
     public static void AddBook(){
-        Scanner sc = new Scanner(System.in);
+        
          System.out.println("+-------------------------------------------------------------------------------+");
          System.out.println("|                               ADD BOOK                                        |");
          System.out.println("+-------------------------------------------------------------------------------+");
 
-        List<Book> books = new ArrayList<>();
+        Book[] bookstore = new Book[10];
+        int i = 0;
+        boolean flag = true;
+        Scanner sc = new Scanner(System.in);
 
-        while(true){ 
+        while(flag){ 
+
             System.out.print("Enter Book ID: ");
             String bookID = sc.next();
+            // Check if the book ID already exists
+           if(isBookExist(bookID, bookstore, i)){
+                System.out.println("Book ID already exists. Please enter a different Book ID.");
+                continue; // Skip to the next iteration of the loop
+           }
+
             System.out.print("Enter Book Name: ");
-            String name = sc.nextLine();
+            String name = sc.next();
             System.out.print("Enter Book Price: ");
             double price = sc.nextDouble();
             System.out.print("Enter Book Quantity: ");
             int quantity = sc.nextInt();
             System.out.print("Enter Author: ");
-            String author = sc.nextLine();
+            String author = sc.next();
 
 
-            Book newBook = new Book(bookID, name, price, quantity, author);
-            books.add(newBook);
-            System.out.println("Book Added Succesfully!...");
+            bookstore[i] = new Book(bookID, name, price, quantity, author);
             
-
             System.out.print("Do you want to add another book(Y/N): ");
             String answer = sc.next();
-
-            switch(answer){
-                case "Y":
-                    System.out.println("***********************************************************");
-                    continue;
-                case "y":
-                    System.out.println("***********************************************************");
-                    continue;
-                case "N":
-                    ShowBookshopMenu();
-                    break;
-                case "n":
-                    ShowBookshopMenu();
-                    break;
+            
+            answer = answer.toLowerCase();
+            if(answer.equals("y")){
+                i++;
+            }else if(answer.equals("n")){
+                ShowBookshopMenu();
+                flag = false;
             }
-            sc.close();
+            System.out.println("**********************************************************");
         }
+    }
 
-        
-        
-        
-        
+    public static boolean isBookExist(String bookID, Book[] bookstore, int currindex){
+            for(int j=0; j<bookstore.length; j++){
+                if(bookstore[j] != null && bookstore[j].bookID.equals(bookID)){
+                    return true;
+                }
+            }
+            return false;
     }
 
 
@@ -148,7 +152,7 @@ public class BookshopManagementSystem{
          System.out.println("+-------------------------------------------------------------------------------+");
 
         System.out.print("Enter Book Id to delete the item: ");
-        String bookID = sc.next();
+        String id = sc.next();
 
 
 
@@ -204,10 +208,6 @@ class Book{
         this.author = author;
     }
 
-    @Override
-    public String toString() {
-        return String.format("| %-13s | %-13s | %-13s | %-13s | %-13s |\n", bookID, name, price, quantity, author);
-    }
 
 
 }
