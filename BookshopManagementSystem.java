@@ -1,8 +1,8 @@
 import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.List;
 
 public class BookshopManagementSystem{
+    private static Book[] bookstore = new Book[10];
+    private static int i = 0;
     public static void main(String[] args){
         ShowloginPage();
     }
@@ -65,13 +65,13 @@ public class BookshopManagementSystem{
 				AddBook();
 				break;
 			case "2":
-				DeleteBook();
+				DeleteBook(bookstore);
 				break;
 			case "3":
 				UpdateBook();
 				break;
             case "4":
-				ShowAll();
+				ShowAll(bookstore);
 				break;
             case "5":
                 LogOut();
@@ -93,8 +93,8 @@ public class BookshopManagementSystem{
          System.out.println("|                               ADD BOOK                                        |");
          System.out.println("+-------------------------------------------------------------------------------+");
 
-        Book[] bookstore = new Book[10];
-        int i = 0;
+        // Book[] bookstore = new Book[10];
+        // int i = 0;
         boolean flag = true;
         Scanner sc = new Scanner(System.in);
 
@@ -122,6 +122,8 @@ public class BookshopManagementSystem{
             String author = sc.next();
             bookstore[i].setAuthor(author);
 
+            System.out.println("Book added sucessfully!...");
+
             System.out.print("Do you want to add another book(Y/N): ");
             String answer = sc.next();
             
@@ -129,6 +131,7 @@ public class BookshopManagementSystem{
             if(answer.equals("y")){
                 i++;
             }else if(answer.equals("n")){
+                
                 ShowBookshopMenu();
                 flag = false;
             }
@@ -148,7 +151,7 @@ public class BookshopManagementSystem{
 
 
 
-    public static void DeleteBook(){
+    public static void DeleteBook(Book[] bookstore){
         Scanner sc = new Scanner(System.in);
          System.out.println("+-------------------------------------------------------------------------------+");
          System.out.println("|                               DELETE BOOK                                     |");
@@ -156,6 +159,12 @@ public class BookshopManagementSystem{
 
         System.out.print("Enter Book Id to delete the item: ");
         String id = sc.next();
+        for(int i=0; i<bookstore.length; i++){
+            if(id.equals(bookstore[i].getbookID()) ){
+                
+            }
+
+        }
 
 
 
@@ -167,7 +176,7 @@ public class BookshopManagementSystem{
         System.out.println("+-------------------------------------------------------------------------------+");
     }
 
-    public static void ShowAll(){
+    public static void ShowAll(Book[] bookstore){
         System.out.println("+-------------------------------------------------------------------------------+");
         System.out.println("|                               SHOW ALL BOOK                                   |");
         System.out.println("+-------------------------------------------------------------------------------+");
@@ -176,11 +185,19 @@ public class BookshopManagementSystem{
         System.out.printf("| %-13s | %-13s | %-13s | %-13s | %-13s |\n","Book ID", "Book Name", "Book Price", "Book Qty", "Book Author");
         System.out.println("---------------------------------------------------------------------------------");
 
-
+        for (int i = 0; i < bookstore.length; i++) {
+            if (bookstore[i] != null) {
+                System.out.printf("| %-13s | %-13s | %-13.2f | %-13d | %-13s |\n",
+                        bookstore[i].getbookID(), bookstore[i].getName(), bookstore[i].getPrice(),
+                        bookstore[i].getQuantity(), bookstore[i].getAuthor());
+            }
+        }
+        
        
-       
-
     }
+
+    
+
 
     public static void LogOut(){
         System.out.println("+-------------------------------------------------------------------------------+");
@@ -252,8 +269,5 @@ class Book{
     public String getAuthor(){
         return author;
     }
-
-    
-
 
 }
