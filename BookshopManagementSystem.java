@@ -99,7 +99,7 @@ public class BookshopManagementSystem{
         Scanner sc = new Scanner(System.in);
 
         while(flag){ 
-
+            bookstore[i] = new Book();
             System.out.print("Enter Book ID: ");
             String bookID = sc.next();
             bookstore[i].setbookID(bookID);
@@ -111,17 +111,17 @@ public class BookshopManagementSystem{
 
             System.out.print("Enter Book Name: ");
             String name = sc.next();
+            bookstore[i].setName(name);
             System.out.print("Enter Book Price: ");
             double price = sc.nextDouble();
+            bookstore[i].setPrice(price);
             System.out.print("Enter Book Quantity: ");
             int quantity = sc.nextInt();
             bookstore[i].setQuantity(quantity);
             System.out.print("Enter Author: ");
             String author = sc.next();
+            bookstore[i].setAuthor(author);
 
-
-            bookstore[i] = new Book( name, price, author);
-            
             System.out.print("Do you want to add another book(Y/N): ");
             String answer = sc.next();
             
@@ -134,10 +134,11 @@ public class BookshopManagementSystem{
             }
             System.out.println("**********************************************************");
         }
+        
     }
 
     public static boolean isBookExist(String bookID, Book[] bookstore, int currindex){
-            for(int j=0; j<bookstore.length; j++){
+            for(int j=0; j<currindex; j++){
                 if(bookstore[j] != null && bookstore[j].getbookID().equals(bookID)){
                     return true;
                 }
@@ -197,16 +198,10 @@ public class BookshopManagementSystem{
 class Book{
     //attributes
     private String bookID;
-    String name;
-    double price;
+    private String name;
+    private double price;
     private int quantity;
-    String author;
-
-    public Book( String name, double  price,  String author){
-        this.name = name;
-        this.price = price;
-        this.author = author;
-    }
+    private String author;
 
     //bookid
     public void setbookID(String bookID){
@@ -217,6 +212,24 @@ class Book{
         return bookID;
     }
 
+    //name
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    //price
+    public void setPrice(double price){
+        this.price = price;
+    }
+
+    public double getPrice(){
+        return price;
+    }
+
     //quantity
     public void setQuantity(int quantity){
         if(quantity==0 || quantity<0){
@@ -225,6 +238,19 @@ class Book{
             this.quantity = quantity;
         }
         
+    }
+
+    public int getQuantity(){
+        return quantity;
+    }
+
+    //author
+    public void setAuthor(String author){
+        this.author = author;
+    }
+
+    public String getAuthor(){
+        return author;
     }
 
     
