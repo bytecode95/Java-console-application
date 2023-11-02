@@ -102,6 +102,7 @@ public class BookshopManagementSystem{
 
             System.out.print("Enter Book ID: ");
             String bookID = sc.next();
+            bookstore[i].setbookID(bookID);
             // Check if the book ID already exists
            if(isBookExist(bookID, bookstore, i)){
                 System.out.println("Book ID already exists. Please enter a different Book ID.");
@@ -114,11 +115,12 @@ public class BookshopManagementSystem{
             double price = sc.nextDouble();
             System.out.print("Enter Book Quantity: ");
             int quantity = sc.nextInt();
+            bookstore[i].setQuantity(quantity);
             System.out.print("Enter Author: ");
             String author = sc.next();
 
 
-            bookstore[i] = new Book(bookID, name, price, quantity, author);
+            bookstore[i] = new Book( name, price, author);
             
             System.out.print("Do you want to add another book(Y/N): ");
             String answer = sc.next();
@@ -136,7 +138,7 @@ public class BookshopManagementSystem{
 
     public static boolean isBookExist(String bookID, Book[] bookstore, int currindex){
             for(int j=0; j<bookstore.length; j++){
-                if(bookstore[j] != null && bookstore[j].bookID.equals(bookID)){
+                if(bookstore[j] != null && bookstore[j].getbookID().equals(bookID)){
                     return true;
                 }
             }
@@ -194,20 +196,38 @@ public class BookshopManagementSystem{
 
 class Book{
     //attributes
-    String bookID;
+    private String bookID;
     String name;
     double price;
-    int quantity;
+    private int quantity;
     String author;
 
-    public Book(String bookID, String name, double  price, int quantity, String author){
-        this.bookID = bookID;
+    public Book( String name, double  price,  String author){
         this.name = name;
         this.price = price;
-        this.quantity = quantity;
         this.author = author;
     }
 
+    //bookid
+    public void setbookID(String bookID){
+        this.bookID = bookID;
+    }
+
+    public String getbookID(){
+        return bookID;
+    }
+
+    //quantity
+    public void setQuantity(int quantity){
+        if(quantity==0 || quantity<0){
+            System.out.println("You can not store book without valid quantity! please check again");
+        }else{
+            this.quantity = quantity;
+        }
+        
+    }
+
+    
 
 
 }
