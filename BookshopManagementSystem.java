@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class BookshopManagementSystem{
@@ -131,12 +132,15 @@ public class BookshopManagementSystem{
             if(answer.equals("y")){
                 i++;
             }else if(answer.equals("n")){
-                
                 ShowBookshopMenu();
                 flag = false;
+            }else{
+                System.out.println("Please add Y/y or N/y");
             }
             System.out.println("**********************************************************");
         }
+
+    
         
     }
 
@@ -157,14 +161,39 @@ public class BookshopManagementSystem{
          System.out.println("|                               DELETE BOOK                                     |");
          System.out.println("+-------------------------------------------------------------------------------+");
 
-        System.out.print("Enter Book Id to delete the item: ");
-        String id = sc.next();
-        for(int i=0; i<bookstore.length; i++){
-            if(id.equals(bookstore[i].getbookID()) ){
-                
+        //System.out.println(Arrays.deepToString(bookstore));
+
+        boolean flag = true;
+        while(flag){
+            System.out.print("Enter Book Id to delete the item: ");
+            String id = sc.next();
+            int indexToremove = -1;
+            for(int i=0; i<bookstore.length; i++){
+                if(id.equals(bookstore[i].getbookID()) ){
+                    indexToremove = i;
+                    break;
+                }
+            }
+            // If the book is found, remove it from the array
+            if (indexToremove != -1) {
+                System.arraycopy(bookstore, indexToremove + 1, bookstore, indexToremove, bookstore.length - indexToremove - 1);
+                bookstore[bookstore.length - 1] = null;
+                System.out.println("Book with ID " + id + " has been deleted.");
+            } else {
+                System.out.println("Book with ID " + id + " not found.");
             }
 
+            System.out.print("Do you want delete another book?(Y/N): ");
+            String answer = sc.next();
+            answer = answer.toLowerCase();
+            if(answer.equals("n")){
+                ShowBookshopMenu();
+                flag = false;
+            }else {
+                DeleteBook(bookstore);
+            }
         }
+        
 
 
 
@@ -185,6 +214,7 @@ public class BookshopManagementSystem{
         System.out.printf("| %-13s | %-13s | %-13s | %-13s | %-13s |\n","Book ID", "Book Name", "Book Price", "Book Qty", "Book Author");
         System.out.println("---------------------------------------------------------------------------------");
 
+        Scanner sc = new Scanner(System.in);
         for (int i = 0; i < bookstore.length; i++) {
             if (bookstore[i] != null) {
                 System.out.printf("| %-13s | %-13s | %-13.2f | %-13d | %-13s |\n",
@@ -192,6 +222,17 @@ public class BookshopManagementSystem{
                         bookstore[i].getQuantity(), bookstore[i].getAuthor());
             }
         }
+
+            System.out.println(" ");
+            System.out.print("Do you want to go Page content? (Y/N): ");
+            String answer = sc.next();
+            
+            answer = answer.toLowerCase();
+            if(answer.equals("y")){
+                ShowBookshopMenu();
+            }else if(answer.equals("n")){
+                ShowAll(bookstore);   
+            }
         
        
     }
