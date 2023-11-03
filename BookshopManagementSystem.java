@@ -169,7 +169,7 @@ public class BookshopManagementSystem{
             String id = sc.next();
             int indexToremove = -1;
             for(int i=0; i<bookstore.length; i++){
-                if(id.equals(bookstore[i].getbookID()) ){
+                if(bookstore[i] != null && id.equals(bookstore[i].getbookID()) ){
                     indexToremove = i;
                     break;
                 }
@@ -179,10 +179,15 @@ public class BookshopManagementSystem{
                 System.arraycopy(bookstore, indexToremove + 1, bookstore, indexToremove, bookstore.length - indexToremove - 1);
                 bookstore[bookstore.length - 1] = null;
                 System.out.println("Book with ID " + id + " has been deleted.");
+                for( Book book: bookstore){
+                    System.out.println((book));
+                }
+
             } else {
                 System.out.println("Book with ID " + id + " not found.");
             }
 
+            System.out.println(" ");
             System.out.print("Do you want delete another book?(Y/N): ");
             String answer = sc.next();
             answer = answer.toLowerCase();
