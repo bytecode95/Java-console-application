@@ -45,7 +45,7 @@ public class BookshopManagementSystem{
         }
 
         }  
-        sc.close();
+       
     }
 
     public static void ShowBookshopMenu(){
@@ -69,7 +69,7 @@ public class BookshopManagementSystem{
 				DeleteBook(bookstore);
 				break;
 			case "3":
-				UpdateBook();
+				UpdateBook(bookstore);
 				break;
             case "4":
 				ShowAll(bookstore);
@@ -85,7 +85,7 @@ public class BookshopManagementSystem{
 
 		}
 
-        sc.close();
+        
     }
 
     public static void AddBook(){
@@ -188,7 +188,7 @@ public class BookshopManagementSystem{
             }
 
             System.out.println(" ");
-            System.out.print("Do you want delete another book?(Y/N): ");
+            System.out.print("Do you want to delete another book?(Y/N): ");
             String answer = sc.next();
             answer = answer.toLowerCase();
             if(answer.equals("n")){
@@ -204,10 +204,42 @@ public class BookshopManagementSystem{
 
     }
 
-    public static void UpdateBook(){
+    public static void UpdateBook(Book[] bookstore){
+        Scanner sc = new Scanner(System.in);
         System.out.println("+-------------------------------------------------------------------------------+");
         System.out.println("|                               UPDATE BOOK                                     |");
         System.out.println("+-------------------------------------------------------------------------------+");
+
+        boolean flag = true;
+        while(flag){
+            System.out.print("Enter book ID: ");
+            String id = sc.next();
+            for(int i=0; i<bookstore.length; i++){
+                if(bookstore[i] != null && id.equals(bookstore[i].getbookID())){
+                    System.out.print("Enter book name: ");
+                    String name = sc.next();
+                    bookstore[i].setName(name);
+                    System.out.println("Updated Successfully!..");
+                }
+                else if(bookstore[i] == null){
+                    System.out.println("Oops bookstore is empty.. Please add books");
+                }
+            }
+
+            System.out.println(" ");
+            System.out.print("Do you want to update another book?(Y/N): ");
+            String answer = sc.next();
+            answer = answer.toLowerCase();
+            if(answer.equals("n")){
+                ShowBookshopMenu();
+                flag = false;
+            }else {
+                UpdateBook(bookstore);
+            }
+        }
+        
+
+
     }
 
     public static void ShowAll(Book[] bookstore){
@@ -243,7 +275,6 @@ public class BookshopManagementSystem{
     }
 
     
-
 
     public static void LogOut(){
         System.out.println("+-------------------------------------------------------------------------------+");
