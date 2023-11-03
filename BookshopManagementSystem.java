@@ -1,4 +1,4 @@
-import java.util.Arrays;
+
 import java.util.Scanner;
 
 public class BookshopManagementSystem{
@@ -57,7 +57,7 @@ public class BookshopManagementSystem{
         System.out.println("+-------------------------------------------------------------------------------+");
 
         System.out.println("[1]Add Book                                                 [2]Delete Book");
-        System.out.println("[3]Upadate Book                                             [4]Show All Books");
+        System.out.println("[3]Update Book                                              [4]Show All Books");
         System.out.println("[5]Logout                                                   [6]Exit the System");
 
         System.out.print("ENTER AN OPTION TO CONTINUE: ");
@@ -80,8 +80,7 @@ public class BookshopManagementSystem{
                 LogOut();
                 break;
             case "6":
-                System.out.println("------------------------------");
-                System.out.println("(Program exited with code 0:)");
+                System.exit(0);
                 break;
             default:
                 ShowBookshopMenu();
@@ -203,9 +202,10 @@ public class BookshopManagementSystem{
                         System.arraycopy(bookstore, indexToremove + 1, bookstore, indexToremove, bookstore.length - indexToremove - 1);
                         bookstore[bookstore.length - 1] = null;
                         System.out.println("Book with ID " + id + " has been deleted.");
+                        
                         for( Book book: bookstore){
-                            System.out.println((book));
-                        }
+                            System.out.println(book);
+                        }  
 
                     } else {
                         System.out.println("Book with ID " + id + " not found.");
@@ -397,6 +397,12 @@ class Book{
 
     public String getAuthor(){
         return author;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("[{Book ID: %-5s , Name: %-5s , Price: %-5f , Quantity: %-5d , Author: %-5s}]",
+                getbookID(), getName(), getPrice(), getQuantity(), getAuthor());
     }
 
 }
