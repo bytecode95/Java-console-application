@@ -161,47 +161,65 @@ public class BookshopManagementSystem{
          System.out.println("|                               DELETE BOOK                                     |");
          System.out.println("+-------------------------------------------------------------------------------+");
 
-        //System.out.println(Arrays.deepToString(bookstore));
-
-        boolean flag = true;
-        while(flag){
-            System.out.print("Enter Book Id to delete the item: ");
-            String id = sc.next();
-            int indexToremove = -1;
-            for(int i=0; i<bookstore.length; i++){
-                if(bookstore[i] != null && id.equals(bookstore[i].getbookID()) ){
-                    indexToremove = i;
+        // Check if all elements in the array are null
+            boolean isEmpty = true;
+            for (Book book : bookstore) {
+                if (book != null) {
+                    isEmpty = false;
                     break;
                 }
             }
-            // If the book is found, remove it from the array
-            if (indexToremove != -1) {
-                System.arraycopy(bookstore, indexToremove + 1, bookstore, indexToremove, bookstore.length - indexToremove - 1);
-                bookstore[bookstore.length - 1] = null;
-                System.out.println("Book with ID " + id + " has been deleted.");
-                for( Book book: bookstore){
-                    System.out.println((book));
+
+            if (isEmpty) {
+                System.out.println("Oops, bookstore is empty. Please add books.");
+                System.out.println(" ");
+                System.out.print("Do you want to continue to the content page?(Y/N): ");
+                String input = sc.next();
+                input = input.toLowerCase();
+                if (input.equals("y")) {
+                    ShowBookshopMenu();
+                    // Exit the method if the array is empty
                 }
-
-            } else {
-                System.out.println("Book with ID " + id + " not found.");
             }
 
-            System.out.println(" ");
-            System.out.print("Do you want to delete another book?(Y/N): ");
-            String answer = sc.next();
-            answer = answer.toLowerCase();
-            if(answer.equals("n")){
-                ShowBookshopMenu();
-                flag = false;
-            }else {
-                DeleteBook(bookstore);
-            }
-        }
+
         
+        boolean flag = true;
+            while(flag){
+                    System.out.print("Enter Book Id to delete the item: ");
+                    String id = sc.next();
+                    int indexToremove = -1;
+                    for(int i=0; i<bookstore.length; i++){
+                        if(bookstore[i] != null && id.equals(bookstore[i].getbookID()) ){
+                            indexToremove = i;
+                            break;
+                        }
+                    }
+                    // If the book is found, remove it from the array
+                    if (indexToremove != -1) {
+                        System.arraycopy(bookstore, indexToremove + 1, bookstore, indexToremove, bookstore.length - indexToremove - 1);
+                        bookstore[bookstore.length - 1] = null;
+                        System.out.println("Book with ID " + id + " has been deleted.");
+                        for( Book book: bookstore){
+                            System.out.println((book));
+                        }
 
+                    } else {
+                        System.out.println("Book with ID " + id + " not found.");
+                    }
 
-
+                    System.out.println(" ");
+                    System.out.print("Do you want to delete another book?(Y/N): ");
+                    String answer = sc.next();
+                    answer = answer.toLowerCase();
+                    if(answer.equals("n")){
+                        ShowBookshopMenu();
+                        flag = false;
+                    }else {
+                        DeleteBook(bookstore);
+                    }
+                      
+        }
     }
 
     public static void UpdateBook(Book[] bookstore){
@@ -214,16 +232,20 @@ public class BookshopManagementSystem{
         while(flag){
             System.out.print("Enter book ID: ");
             String id = sc.next();
+            boolean found = false; 
             for(int i=0; i<bookstore.length; i++){
                 if(bookstore[i] != null && id.equals(bookstore[i].getbookID())){
                     System.out.print("Enter book name: ");
                     String name = sc.next();
                     bookstore[i].setName(name);
                     System.out.println("Updated Successfully!..");
+                    found = true;
+                    break;
                 }
-                else if(bookstore[i] == null){
-                    System.out.println("Oops bookstore is empty.. Please add books");
-                }
+            }
+
+            if(!found){
+                System.out.println("Book ID not found.");
             }
 
             System.out.println(" ");
