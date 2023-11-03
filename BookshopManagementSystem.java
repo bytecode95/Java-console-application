@@ -78,7 +78,8 @@ public class BookshopManagementSystem{
                 LogOut();
                 break;
             case "6":
-                ExitSystem();
+                System.out.println("__________________________");
+                System.out.println("(Program exited with code 0:)");
                 break;
             default:
                 ShowBookshopMenu();
@@ -299,16 +300,23 @@ public class BookshopManagementSystem{
     
 
     public static void LogOut(){
+        Scanner sc = new Scanner(System.in);
         System.out.println("+-------------------------------------------------------------------------------+");
         System.out.println("|                               LOG OUT                                         |");
         System.out.println("+-------------------------------------------------------------------------------+");
+
+        System.out.print("Do you want to logout?(Y/N)");
+        String answer = sc.next();
+            answer = answer.toLowerCase();
+            if(answer.equals("y")){
+                ShowloginPage();
+                
+            }else{
+                ShowBookshopMenu();
+            }
+
     }
 
-    public static void ExitSystem(){
-        System.out.println("+-------------------------------------------------------------------------------+");
-        System.out.println("|                              Exit the System                                  |");
-        System.out.println("+-------------------------------------------------------------------------------+");
-    }
 }
 
 class Book{
