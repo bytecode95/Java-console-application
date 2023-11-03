@@ -5,6 +5,7 @@ public class BookshopManagementSystem{
     private static Book[] bookstore = new Book[10];
     private static int i = 0;
     public static void main(String[] args){
+        clearConsole();
         ShowloginPage();
     }
 
@@ -49,6 +50,7 @@ public class BookshopManagementSystem{
     }
 
     public static void ShowBookshopMenu(){
+        clearConsole();
         Scanner sc = new Scanner(System.in);
         System.out.println("+-------------------------------------------------------------------------------+");
         System.out.println("|                 WELCOME TO SHI BOOK SHOP MANAGEMENT SYSTEM                    |");
@@ -78,7 +80,7 @@ public class BookshopManagementSystem{
                 LogOut();
                 break;
             case "6":
-                System.out.println("__________________________");
+                System.out.println("------------------------------");
                 System.out.println("(Program exited with code 0:)");
                 break;
             default:
@@ -307,17 +309,37 @@ public class BookshopManagementSystem{
 
         System.out.print("Do you want to logout?(Y/N)");
         String answer = sc.next();
-            answer = answer.toLowerCase();
-            if(answer.equals("y")){
-                ShowloginPage();
-                
-            }else{
-                ShowBookshopMenu();
-            }
+        answer = answer.toLowerCase();
+        if(answer.equals("y")){
+            ShowloginPage();
+            
+        }else{
+            ShowBookshopMenu();
+        }
+        sc.close();
 
     }
 
+    public static void clearConsole() {
+        try {
+            final String os = System.getProperty("os.name");
+            if (os.contains("Windows")) {
+                // For Windows
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            } else {
+                // For other operating systems
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
+            }
+        } catch (final Exception e) {
+            // Handle exceptions
+        }
+    }
+    
+    
+   
 }
+
 
 class Book{
     //attributes
